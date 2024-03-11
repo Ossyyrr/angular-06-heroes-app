@@ -1,11 +1,13 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, map, startWith } from 'rxjs';
+import { Hero } from '../../interfaces/hero.interface';
+import { HeroesService } from '../../services/heroes.service';
+
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
@@ -18,24 +20,34 @@ import { map, startWith } from 'rxjs/operators';
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
+    CommonModule,
   ],
 })
 export class SearchPageComponent implements OnInit {
+  constructor(private heroesService: HeroesService) {}
+
   public myControl = new FormControl('');
-  public options: string[] = ['One', 'Two', 'Three'];
-  public filteredOptions?: Observable<string[]>;
+  public options: Hero[] = [];
+  public filteredOptions: Observable<Hero[]> = new Observable<Hero[]>();
+
   ngOnInit() {
+    this.heroesService.getHeroes().subscribe((heroes) => {
+      this.options = heroes;
+      this.myControl.updateValueAndValidity();
+    });
+    console.log('*** this.options', this.options.length);
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): Hero[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter((option) =>
-      option.toLowerCase().includes(filterValue)
+      option.superhero.toLowerCase().includes(filterValue)
     );
   }
 }

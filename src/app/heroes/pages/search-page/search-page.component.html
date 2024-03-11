@@ -1,18 +1,26 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Number</mat-label>
-    <input
-      type="text"
-      placeholder="Pick one"
-      aria-label="Number"
-      matInput
-      [formaction]="myControl"
-      [matAutocomplete]="auto"
-    />
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      @for (option of filteredOptions | async; track option) {
-      <mat-option [value]="option">{{ option }}</mat-option>
-      }
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+<div>
+  <h1>Buscador</h1>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Heroe</mat-label>
+      <input
+        type="text"
+        placeholder="Elige un heroe"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        @for (option of filteredOptions | async; track option ) {
+        <mat-option [value]="option.superhero">{{
+          option.superhero
+        }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <div *ngFor="let item of options">
+    {{ item.superhero }}
+  </div>
+</div>
