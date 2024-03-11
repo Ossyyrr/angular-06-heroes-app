@@ -21,7 +21,7 @@
   </form>
   <!--  <div *ngFor="let item of options">    {{ item.superhero }} </div> -->
 
-  <ng-template #selectedHero>Sin Heroe Seleccionado</ng-template>
+  <ng-template #selectedHero>El héroe no existe</ng-template>
 
   <div *ngIf="selectedOption; else selectedHero">
     <heroes-hero-card [hero]="selectedOption"></heroes-hero-card>

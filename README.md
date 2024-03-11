@@ -34,3 +34,13 @@ Peticiones HTTP
 JSON-Server
 
 Prime Flex
+
+CRUD
+
+Pipes puros e impuros
+
+Snacks
+
+Dialogs
+
+Inyección de servicios manualmente
