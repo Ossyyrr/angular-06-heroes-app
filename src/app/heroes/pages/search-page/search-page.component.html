@@ -19,16 +19,11 @@
       </mat-autocomplete>
     </mat-form-field>
   </form>
-
-  <div *ngFor="let item of options">
-    {{ item.superhero }}
-  </div>
-  <hr />
+  <!--  <div *ngFor="let item of options">    {{ item.superhero }} </div> -->
 
   <ng-template #selectedHero>Sin Heroe Seleccionado</ng-template>
 
   <div *ngIf="selectedOption; else selectedHero">
-    <!-- <heroes-hero-card></heroes-hero-card> -->
-    {{ selectedOption.superhero }}
+    <heroes-hero-card [hero]="selectedOption"></heroes-hero-card>
   </div>
 </div>
