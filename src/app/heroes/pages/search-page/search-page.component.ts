@@ -1,9 +1,5 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Hero } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
@@ -12,16 +8,6 @@ import { HeroesService } from '../../services/heroes.service';
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.css',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    AsyncPipe,
-    CommonModule,
-  ],
 })
 export class SearchPageComponent implements OnInit {
   constructor(private heroesService: HeroesService) {}
@@ -29,6 +15,7 @@ export class SearchPageComponent implements OnInit {
   public myControl = new FormControl('');
   public options: Hero[] = [];
   public filteredOptions: Observable<Hero[]> = new Observable<Hero[]>();
+  public selectedOption?: Hero;
 
   ngOnInit() {
     this.heroesService.getHeroes().subscribe((heroes) => {
@@ -45,6 +32,10 @@ export class SearchPageComponent implements OnInit {
 
   private _filter(value: string): Hero[] {
     const filterValue = value.toLowerCase();
+
+    this.selectedOption = this.options.find((option) =>
+      option.superhero.toLowerCase().includes(filterValue)
+    );
 
     return this.options.filter((option) =>
       option.superhero.toLowerCase().includes(filterValue)

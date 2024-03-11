@@ -23,4 +23,12 @@
   <div *ngFor="let item of options">
     {{ item.superhero }}
   </div>
+  <hr />
+
+  <ng-template #selectedHero>Sin Heroe Seleccionado</ng-template>
+
+  <div *ngIf="selectedOption; else selectedHero">
+    <!-- <heroes-hero-card></heroes-hero-card> -->
+    {{ selectedOption.superhero }}
+  </div>
 </div>
