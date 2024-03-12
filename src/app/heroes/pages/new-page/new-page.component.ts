@@ -89,21 +89,11 @@ export class NewPageComponent implements OnInit {
       .pipe(
         filter((result: boolean) => result), //! solo pasa si el resultado es true (cuando le doy a borrar)
         switchMap(() => this.heroesService.deleteHeroById(this.currentHero.id)),
-        filter((wasDeleted: boolean) => wasDeleted)
+        filter((wasDeleted: boolean) => wasDeleted) //! Solo si fue borrado
       )
       .subscribe(() => {
         this.router.navigate(['/heroes']);
       });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if ( !result ) return;
-
-    //   this.heroesService.deleteHeroById( this.currentHero.id )
-    //   .subscribe( wasDeleted => {
-    //     if ( wasDeleted )
-    //       this.router.navigate(['/heroes']);
-    //   })
-    // });
   }
 
   showSnackbar(message: string): void {

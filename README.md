@@ -1,12 +1,11 @@
 # 06HeroesApp
 
-Para cargar el backend: npm run backend (definido en package.json)
-paquete usado: https://www.npmjs.com/package/json-server
+Paquete usado para backend (local): https://www.npmjs.com/package/json-server
 
 ### Dev
 
 1. Ejecurat `npm install`
-2. Levantar backend `npm run backend`
+2. Levantar backend `npm run backend` (definido en package.json)
 3. Ejecurat la app `npm start` o bien ``ng serve -o`
 
 ## Temas
@@ -44,3 +43,19 @@ Snacks
 Dialogs
 
 Inyección de servicios manualmente
+
+Protección de rutas
+
+Rutas privadas
+
+Rutas públicas
+
+Servicio de autenticación
+
+Guards
+
+Can Activate
+
+Can Match
+
+Mantener la sesión del usuario
