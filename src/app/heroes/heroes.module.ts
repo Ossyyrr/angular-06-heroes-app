@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { HeroCardComponent } from './components/hero-card/hero-card.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { HeroPageComponent } from './pages/hero-page/hero-page.component';
@@ -20,9 +21,11 @@ import { HeroImagePipe } from './pipes/hero-image.pipe';
     NewPageComponent,
     HeroCardComponent,
     SearchPageComponent,
+    ConfirmDialogComponent,
 
     //PIPES
     HeroImagePipe,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
