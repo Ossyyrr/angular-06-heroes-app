@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/guards/auth.guard';
+import { PublicGuard } from './auth/guards/public.guard';
 import { Error404PageComponent } from './shared/pages/error404-page/error404-page.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -8,12 +9,15 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    canActivate: [PublicGuard],
+    canMatch: [PublicGuard],
   },
   {
     path: 'heroes',
     loadChildren: () =>
       import('./heroes/heroes.module').then((m) => m.HeroesModule),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], //! Por ejemplo, para controlar el acceso de los Rols de usuario con diferentes guards
+    canMatch: [AuthGuard],
   },
   {
     path: '404',
